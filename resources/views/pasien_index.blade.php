@@ -14,29 +14,29 @@
                             <thead>
                                 <tr>
                                     <th>ID</th>
-                                    <th>code dokter</th>
-                                    <th>nama dokter</th>
-                                    <th>spesialis</th>
-                                    <th>Created</th>
-                                    <th>Nomor Hp</th>
+                                    <th>code pasien</th>
+                                    <th>nama pasien</th>
+                                    <th>jenis kelamin</th>
+                                    <th>status</th>
+                                    <th>alamat</th>
                                     <th>aksi</th>
                                 </tr>
                             </thead>
 
                             <tbody>
-                                @foreach ($dokter as $dok)
+                                @foreach ($pasien as $pas)
                                     <tr>
-                                        <td>{{ $dok->id }}</td>
-                                        <td>{{ $dok->kode_dokter }}</td>
-                                        <td>{{ $dok->nama_dokter }}</td>
-                                        <td>{{ $dok->spesialis }}</td>
-                                        <td>{{ $dok->nomor_hp }}</td>
-                                        <td>{{ $dok->created_at }}</td>
+                                        <td>{{ $pas->id }}</td>
+                                        <td>{{ $pas->kode_pasien }}</td>
+                                        <td>{{ $pas->nama_pasien }}</td>
+                                        <td>{{ $pas->jenis_kelamin }}</td>
+                                        <td>{{ $pas->status }}</td>
+                                        <td>{{ $pas->alamat }}</td>
                                         <td class="text-center d-flex gap-2">
-                                            <a href="{{ url('dokter/' . $dok->id . '/edit') }}"
+                                            <a href="{{ url('pasien/' . $pas->id . '/edit') }}"
                                                 class="btn btn-primary">Edit</a>
 
-                                            <form action="{{ url('dokter/' . $dok->id) }}" method="POST" class="d-inline"
+                                            <form action="{{ url('pasien/' . $pas->id) }}" method="POST" class="d-inline"
                                                 onsubmit="return confirm('Apakah anda yakin ingin menghapus data ini ?');">
 
                                                 @csrf
@@ -50,7 +50,7 @@
                         </table>
                     </div>
                     <div class="card-footer">
-                        {{ $dokter->links() }}
+                        {{ $pasien->links() }}
                     </div>
                 </div>
             </div>

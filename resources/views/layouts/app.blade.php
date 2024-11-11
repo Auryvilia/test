@@ -43,8 +43,9 @@
                                     <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#"
                                         role="button" aria-expanded="false">Klinik</a>
                                     <ul class="dropdown-menu">
-                                        <li><a class="dropdown-item" href="#">Data Pasien</a></li>
-                                        <li><a class="dropdown-item" href="#">tambah Pasien</a></li>
+                                        <li><a class="dropdown-item" href="{{ url('pasien', []) }}">Data Pasien</a></li>
+                                        <li><a class="dropdown-item" href="{{ url('pasien/create', []) }}">tambah Pasien</a>
+                                        </li>
                                         <li><a class="dropdown-item" href="{{ url('dokter', []) }}">
                                                 Data Dokter
                                             </a>
@@ -56,9 +57,18 @@
                                         </li>
                                     </ul>
                                 </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="#">Link</a>
-                                </li>
+                                <div class="dropdown">
+                                    <button class="btn btn-secondary dropdown-toggle" type="button"
+                                        data-bs-toggle="dropdown" aria-expanded="false">
+                                        Laporan
+                                    </button>
+                                    <ul class="dropdown-menu">
+                                        <li><a class="dropdown-item" href="{{ url('dokter/laporan/cetak') }}">Laporan
+                                                Dokter</a></li>
+                                        <li><a class="dropdown-item" href="{{ url('pasien/laporan/cetak') }}">Laporan
+                                                Pasien</a></li>
+                                    </ul>
+                                </div>
                                 <li class="nav-item">
                                     <a class="nav-link disabled" aria-disabled="true">Disabled</a>
                                 </li>

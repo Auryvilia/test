@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Http\Request;
 use \App\Models\Dokter;
 class DokterController extends Controller
@@ -40,7 +41,7 @@ class DokterController extends Controller
             'nomor_hp'=>'required'
         ]);
 
-        $dokter = new \App\Models\Dokter();
+        $dokter = new Dokter();
         $dokter->kode_dokter = $request->kode_dokter;
         $dokter->nama_dokter = $request->nama_dokter;
         $dokter->spesialis = $request->spesialis;
@@ -62,6 +63,10 @@ class DokterController extends Controller
      */
     public function edit(string $id)
     {
+
+        $data['dokter'] =  Dokter::findOrFail($id);
+        $data['list_sp'] = ['umum', 'kandungan', 'anak', 'THT'];
+        return view("dokter_edit", $data);
         //
     }
 
@@ -71,6 +76,22 @@ class DokterController extends Controller
     public function update(Request $request, string $id)
     {
         //
+        $request->validate([
+            'kode_dokter'=>'required',
+            'nama_dokter'=>'required',
+            'spesialis'=>'required',
+            'nomor_hp'=>'required'
+        ]);
+
+        $dokter =  Dokter::findOrFail($id);
+        $dokter->kode_dokter = $request->kode_dokter;
+        $dokter->nama_dokter = $request->nama_dokter;
+        $dokter->spesialis = $request->spesialis;
+        $dokter->nomor_hp = $request->nomor_hp;
+        $dokter->save();
+        return redirect()->route('dokter.index')->with('success', 'Data Berhasil diubah');
+
+
     }
 
     /**
@@ -78,6 +99,16 @@ class DokterController extends Controller
      */
     public function destroy(string $id)
     {
+
+        $dokter =  Dokter::findOrFail($id);
+        $dokter->delete();
+        return redirect()->route('dokter.index')->with('success', 'Data Berhasil dihapus');
         //
+    }
+
+    public function laporan(){
+        $data['dokter'] = Dokter::all()->sortBy('kode_dokter');
+        $data['judul'] = 'Laporan Dokter';
+        return view('dokter_laporan', $data);
     }
 }
